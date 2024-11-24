@@ -1,14 +1,22 @@
 "use client";
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import LoadingSphere from '../ui/analysis/loading'
 import AuthResult from '../ui/analysis/authresult'
 import { addUser } from '../lib/db';
 import { InsertUser } from '../lib/types';
 import { fetchUserData } from '../lib/fetchData';
-import { checkAuth, checkToken, handleTokenExchange} from '../lib/auth';
-import { redirect, useSearchParams } from 'next/navigation';
+import { handleTokenExchange} from '../lib/auth';
+import { useSearchParams } from 'next/navigation';
 
-export default function SpotifyCallback() {
+export default function Page() {
+  return (
+    <Suspense>
+      <SpotifyCallback />
+    </Suspense>
+  )
+}
+
+function SpotifyCallback() {
   const [authStatus, setAuthStatus] = useState<'loading' | 'success' | 'error'>('loading')
   const [message, setMessage] = useState('')
   const searchParams = useSearchParams()
@@ -16,10 +24,6 @@ export default function SpotifyCallback() {
   const code = searchParams.get('code') || '';
 
   useEffect(() => {
-    const auth = checkAuth();
-    if(typeof(auth) === "string" && auth === "Id cookie not found") {
-      redirect("/");
-    }
     setAuthStatus('loading')
     handleAuth(code as string)
   }, [])

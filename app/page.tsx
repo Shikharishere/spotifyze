@@ -25,7 +25,7 @@ export default function Home() {
 
   const handleRedirect = async () => {
     const check = await checkAuth();
-    if(check == "Id cookie found") {
+    if(check) {
       toast("Auto authenticating 🚀")
       await refreshToken();
       router.push("/analysis")
