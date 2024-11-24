@@ -1,5 +1,5 @@
 "use client";
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import RecentGenres from '@/app/ui/genre/RecentGenres';
 import ObscureGenre from '@/app/ui/genre/ObscureGenre';
@@ -9,8 +9,10 @@ import { useRouter } from 'next/navigation';
 
 export default function GenresPage() {
   const router = useRouter();
+    const [isClient, setIsClient] = useState(false);
   React.useEffect(() => {
     check();
+    setIsClient(true);
   }, []);
 
   async function check() {
