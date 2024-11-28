@@ -7,7 +7,7 @@ import { fetchUserData } from "./fetchData";
 export async function getAuthorizationURL() {
     try {
       const client_id = process.env.SPOTIFY_CLIENT_ID as string;
-      const redirect_uri = "https://spotfiyze.vercel.app/api/callback";
+      const redirect_uri = process.env.SPOTIFY_REDIRECT_URI as string;
       const state = Math.random().toString(36).substring(2, 18);
       const scope = [
         'user-read-email',
