@@ -124,7 +124,7 @@ export async function checkAuth() : Promise<Boolean | undefined> {
   try {
     const cookieStore = cookies();
     if(cookieStore.has('id')) {
-	    const currentUser = await fetchUser(cookieStore.get('id')?.value);
+	    const currentUser = await fetchUser(cookieStore.get('id')?.value || '');
         await checkToken(currentUser.access_token);
         return true
     } else {
