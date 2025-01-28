@@ -7,11 +7,14 @@ import { Home, BarChart2, MoreVertical, SeparatorHorizontal, Trash2 } from "luci
 import Link from "next/link";
 import { deleteUser } from "@/app/lib/db";
 import { logout, deleteAccount} from "@/app/lib/auth";
+import { useRouter } from 'next/navigation';
+
 
 export function Nav() {
     const [isScrolled, setIsScrolled] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [loading, setLoading] = useState(false)
+    const router = useRouter();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -24,11 +27,18 @@ export function Nav() {
     const unlink = () => {
         setLoading(true);
         logout();
-        setLoading(false);
+	    setTimeout(() => {
+          	setLoading(false);
+            router.push('/');
+	    }, 3000);
     }
     const removeAccount = () => {
         setLoading(true);
-        deleteAccount();
+        logout();
+	    setTimeout(() => {
+          	setLoading(false);
+            router.push('/');
+	    }, 3000);
     }
 
 
@@ -97,7 +107,7 @@ export function Nav() {
                                     onClick={unlink}
                                 >
                                     <Trash2 className="w-5 h-5" />
-                                    {loading ? <span>Unlinking...</span> : <span>Unlink Account</span>}
+                                    {loading ? <span>Logging out...</span> : <span>Log Out</span>}
                                 </Link>
                                 <Link
                                     href="#"

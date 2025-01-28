@@ -1,4 +1,4 @@
-// This file is used to fetch data from the spotify servers]
+// This file is used to fetch data from the spotify servers
 "use server";
 import { cookies } from "next/headers";
 import { fetchUser } from "./db";
@@ -119,7 +119,7 @@ async function discoveryVsLoayltyScore() : Promise<discoveryVsLoaylty[] | undefi
         if (!current_user) {
             throw new Error('No user found. Please login again');
         }
-        const response = await fetch('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=long_term', {
+        const response = await fetch('https://api.spotify.com/v1/me/top/artists?limit=10&time_range=long_term', {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${current_user.access_token}`,
@@ -414,8 +414,8 @@ async function diversityScore(artists: TopArtists) : Promise<DiversityScore | un
     }
 }
 
-// recommendations
-// for track recommendations : GET /recommendations
+/* recommendations
+for track recommendations : GET /recommendations
 async function trackRecommendations() {
     try {
         const cookiesStore = cookies();
@@ -449,7 +449,7 @@ async function trackRecommendations() {
 }
 
 
-// for playlist recommendations : GET /browse/featured-playlists
+for playlist recommendations : GET /browse/featured-playlists
 async function playlistRecommendations() : Promise<Playlist | undefined> {
     try {
         const cookiesStore = cookies();
@@ -479,6 +479,7 @@ async function playlistRecommendations() : Promise<Playlist | undefined> {
         console.error('Error fetching playlist recommendations:', error);
     }
 }
+*/
 
 async function fetchObscureGenre() : Promise<ObscureGenres | undefined> {
     try {
@@ -506,8 +507,6 @@ export {
     fetchTopArtists,
     fetchTopTracks,
     diversityScore,
-    trackRecommendations,
-    playlistRecommendations,
     fetchRecentArtists,
     discoveryVsLoayltyScore,
     fetchObscureGenre,

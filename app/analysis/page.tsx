@@ -1,8 +1,7 @@
 "use client";
 import { motion } from 'framer-motion'
-import TrackRecommendations from '../ui/analysis/trackrecommendation'
-import ValenceRecommendations from '../ui/analysis/valencerecommendations'
-import PlaylistRecommendations from '../ui/analysis/playlistrecommendations'
+import ValenceRecommendations  from '../ui/analysis/valencerecommendations'
+import TopGenres from '../ui/analysis/topGenre';
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { checkAuth } from '../lib/auth';
@@ -45,10 +44,9 @@ export default function Page() {
         <section className="py-12 px-4">
           <div className="container mx-auto">
             <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <TrackRecommendations/> 
               <ValenceRecommendations />
+	      <TopGenres />
             </div>
-            <PlaylistRecommendations />
           </div>
         </section>
       </main>

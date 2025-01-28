@@ -73,7 +73,7 @@ export async function refreshToken() {
   }
 }
 
-export async function checkToken(access_token : string, refresh_token : string) {
+export async function checkToken(access_token : string) {
   const response = await fetch('https://api.spotify.com/v1/me/top/artists?limit=5', {
     headers: {
       Authorization: `Bearer ${access_token}`,
@@ -124,12 +124,14 @@ export async function checkAuth() : Promise<Boolean | undefined> {
   try {
     const cookieStore = cookies();
     if(cookieStore.has('id')) {
-      return true
+	    const currentUser = await fetchUser(cookieStore.get('id')?.value);
+        await checkToken(currentUser.access_token);
+        return true
     } else {
-      return false
+        return false
     }
   } catch(error) {
-    throw new Error("Error: " + error);
+    throw new Error(error);
   }
 }
 
