@@ -133,7 +133,7 @@ export async function checkAuth() : Promise<Boolean | undefined> {
         return false
     }
   } catch(error) {
-    throw new Error(error);
+    console.error(error);
   }
 }
 
@@ -144,7 +144,7 @@ export async function logout() {
       cookieStore.delete('id') 
     }
   } catch(error) {
-    throw new Error("Error: " + error);
+    console.error(error);
   }
 }
 
@@ -157,6 +157,6 @@ export async function deleteAccount() {
       deleteUser(id);
     }
   } catch(error) {
-    throw new Error("Error: " + error);
+    console.error(error);
   }
 }
